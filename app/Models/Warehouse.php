@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Container\Attributes\Storage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage as FacadesStorage;
+use Illuminate\Support\Facades\Storage;
 
 class Warehouse extends Model
 {
@@ -29,6 +28,6 @@ class Warehouse extends Model
         if (!$value) {
             return null;
         }
-        return url(FacadesStorage::url($value));
+        return url(Storage::url($value));
     }
 }
