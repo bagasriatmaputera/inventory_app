@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Repository;
+use App\Models\Category;
+
+class CategoryRepositories {
+    public function getAll(array $fields){
+        return Category::select($fields)->latest()->get();
+    }
+
+    public function getById (int $id,array $fields){
+        return Category::select($fields)->findOrFail($id);
+    }
+
+    public function create(array $data){
+        return Category::create($data);
+    }
+
+    public function update(int $id,array $data){
+        $category = Category::findOrFail($id);
+        $category->update();
+        return $category;
+    }
+
+    public function delete(int $id){
+        $category = Category::findOrFail($id);
+        $category->delete();
+    }
+}
