@@ -5,7 +5,7 @@ use App\Models\Category;
 
 class CategoryRepositories {
     public function getAll(array $fields){
-        return Category::select($fields)->latest()->get();
+        return Category::select($fields)->latest()->paginate(10);
     }
 
     public function getById (int $id,array $fields){
@@ -18,7 +18,7 @@ class CategoryRepositories {
 
     public function update(int $id,array $data){
         $category = Category::findOrFail($id);
-        $category->update();
+        $category->update($data);
         return $category;
     }
 
