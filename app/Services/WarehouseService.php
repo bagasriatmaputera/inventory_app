@@ -41,13 +41,28 @@ class WarehouseService
         }
         return $this->WarehouseRepository->update($id, $data);
     }
-    public function delete(int $id){
+    public function delete(int $id)
+    {
         $fields = ['id', 'photo'];
-        $warehouse = $this->WarehouseRepository->getById($id,$fields);
+        $warehouse = $this->WarehouseRepository->getById($id, $fields);
         if ($warehouse->photo) {
             $this->deletePhoto($warehouse->photo);
         }
         $this->WarehouseRepository->delete($id);
+    }
+    public function attachProduct(int $warehouseId, int $productId, int $stock)
+    {
+        $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
+        $warehaouse->products()->syncWithoutDetaching(
+            [
+                $productId => ['stock' => $stock]
+            ]
+        );
+    }
+    public function detachProduct(int $warehouseId, int $productId)
+    {
+        $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
+        $warehaouse->products()->detach($productId);
     }
     private function uploadPhoto(UploadedFile $photo)
     {
