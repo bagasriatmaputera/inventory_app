@@ -49,11 +49,11 @@ class CategoryService
         }
         $this->categoryRepositories->delete($id);
     }
-    public function uploadPhoto(UploadedFile $photo)
+    private function uploadPhoto(UploadedFile $photo)
     {
         return $photo->store('categories', 'public');
     }
-    public function deletePhoto(string $photoPath)
+    private function deletePhoto(string $photoPath)
     {
         $relativePath = 'categories/' . basename($photoPath);
         if (Storage::disk('public')->exists($relativePath)) {
