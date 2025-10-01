@@ -30,7 +30,7 @@ class Product extends Model
             ->withTimestamps();
     }
 
-    public function trasaction()
+    public function transaction()
     {
         return $this->hasMany(TransactionProduct::class);
     }
