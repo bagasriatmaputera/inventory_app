@@ -22,7 +22,7 @@ class WarehouseService
     {
         return $this->WarehouseRepository->getById($id, $fields);
     }
-    public function store(array $data)
+    public function create(array $data)
     {
         if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
             $data['photo'] = $this->uploadPhoto($data['photo']);
@@ -58,6 +58,14 @@ class WarehouseService
                 $productId => ['stock' => $stock]
             ]
         );
+    }
+    public function updateProductStock(int $warehouseId, int $productId, int $stock)
+    {
+        $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
+        $warehaouse->products()->updateExistingPivot($productId, [
+            'stock' => $stock
+        ]);
+        return $warehaouse->products()->where('product_id' . $productId)->first();
     }
     public function detachProduct(int $warehouseId, int $productId)
     {
