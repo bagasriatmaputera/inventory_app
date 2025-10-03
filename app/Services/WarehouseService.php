@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Warehouse;
 use App\Repository\WarehouseRepositories;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -59,7 +58,7 @@ class WarehouseService
             ]
         );
     }
-    public function updateProductStock(int $warehouseId, int $productId, int $stock)
+    public function updateProductStock(int $warehouseId, int $productId,$stock)
     {
         $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
         $warehaouse->products()->updateExistingPivot($productId, [
