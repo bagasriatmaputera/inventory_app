@@ -13,7 +13,7 @@ class WarehouseProductRepository
             ->where('product_id', $productId)
             ->first();
     }
-    public function updateAttach(int $warehouseId, int $productId, int $stock)
+    public function updateStock(int $warehouseId, int $productId, int $stock)
     {
         $warehouseProduct = $this->getByWarehouseAndProduct($warehouseId, $productId);
         if (!$warehouseProduct) {
