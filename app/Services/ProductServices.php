@@ -25,28 +25,28 @@ class ProductServices
     }
     public function create($data)
     {
-        if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
-            $data['photo'] = $this->uploadPhoto($data['photo']);
+        if (isset($data['thumbnail']) && $data['thumbnail'] instanceof UploadedFile) {
+            $data['thumbnail'] = $this->uploadPhoto($data['thumbnail']);
         }
         return $this->productRepository->create($data);
     }
     public function update(int $id, array $data)
     {
-        $fields = ['id', 'photo'];
+        $fields = ['id', 'thumbnail'];
         $product = $this->getById($id, $fields ?? ['*']);
-        if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
-            if (!isEmpty($data['photo'])) {
-                $this->deletePhoto($product->photo);
+        if (isset($data['thumbnail']) && $data['thumbnail'] instanceof UploadedFile) {
+            if (!isEmpty($data['thumbnail'])) {
+                $this->deletePhoto($product->thumbnail);
             }
-            $data['photo'] = $this->uploadPhoto($data['photo']);
+            $data['thumbnail'] = $this->uploadPhoto($data['thumbnail']);
         }
         return $this->productRepository->update($id, $data);
     }
     public function delete(int $id)
     {
         $product = $this->getById($id, $fields ?? ['*']);
-        if ($product->photo) {
-            $this->deletePhoto($product->photo);
+        if ($product->thumbnail) {
+            $this->deletePhoto($product->thumbnail);
         }
         return $this->productRepository->delete($id);
     }
