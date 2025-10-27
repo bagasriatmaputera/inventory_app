@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Services\CategoryService;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -34,8 +35,15 @@ class CategoryController extends Controller
     }
     public function store(CategoryRequest $request)
     {
-        $category = $this->categoryService->create($request->validated());
-        return response()->json(new CategoryResource($category), 201);
+        try {
+            $category = $this->categoryService->create($request->validated());
+            return response()->json(new CategoryResource($category), 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage()
+            ]);
+        }
     }
     public function update(int $id, CategoryRequest $request)
     {
@@ -48,16 +56,17 @@ class CategoryController extends Controller
             ]);
         }
     }
-    public function destroy(int $id){
+    public function destroy(int $id)
+    {
         try {
             $this->categoryService->delete($id);
             return response()->json([
                 "success" => "Category deleted"
-            ],201);
+            ], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 "message" => "Category not found"
-            ],401);
+            ], 401);
         }
     }
 }
