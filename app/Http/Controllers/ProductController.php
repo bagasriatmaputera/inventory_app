@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     private ProductServices $productServices;
     public function __construct(ProductServices $productServices){
-        $this->$productServices = $productServices;
+        $this->productServices = $productServices;
     }
     public function index(){
         $product = $this->productServices->getAll($fields ?? ['*']);
