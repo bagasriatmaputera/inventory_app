@@ -22,9 +22,9 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:255|unique:categories,name' . $this->route('category'),
+            'name' => 'required|string|min:3|max:255|unique:categories,name,',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'tagline' => 'required|string|min:3|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 }
