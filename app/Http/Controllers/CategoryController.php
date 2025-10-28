@@ -49,7 +49,10 @@ class CategoryController extends Controller
     {
         try {
             $category = $this->categoryService->update($id, $request->validated());
-            return response()->json(new CategoryResource($category), 201);
+            return response()->json([
+                'meesage' => 'Update Success',
+                'data' => new CategoryResource($category)
+            ], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Category not found'
