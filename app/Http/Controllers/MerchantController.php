@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MerchantRequest;
+use App\Http\Requests\MerchantStoreRequest;
 use App\Http\Resources\MerchantResource;
 use App\Services\MerchantService;
 use Illuminate\Http\Request;
@@ -32,9 +34,9 @@ class MerchantController extends Controller
             ]);
         }
     }
-    public function store(array $data)
+    public function store(MerchantRequest $resquest)
     {
-        $merchant = $this->merchantService->create($data);
+        $merchant = $this->merchantService->create($resquest->validated());
         return response()->json(new MerchantResource($merchant));
     }
     public function update(int $id, array $data)
