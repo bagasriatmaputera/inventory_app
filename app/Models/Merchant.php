@@ -11,7 +11,7 @@ class Merchant extends Model
     use SoftDeletes;
     protected $fillable = [
         'name',
-        'adrress',
+        'address',
         'photo',
         'keeper_id',
         'phone'
