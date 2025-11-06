@@ -13,7 +13,6 @@ class WarehouseProduct extends Model
         'warehouse_id',
         'product_id',
         'stock',
-        'warehouse_id',
     ];
     public function merchant(){
         return $this->belongsTo(Merchant::class);
