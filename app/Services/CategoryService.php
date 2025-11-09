@@ -19,7 +19,7 @@ class CategoryService
     }
     public function getById(int $id, array $fields)
     {
-        return $this->categoryRepositories->getById($id, $fields ?? ['*']);
+    return $this->categoryRepositories->getById($id, $fields ?? ['*']);
     }
     public function create(array $data)
     {
@@ -31,7 +31,7 @@ class CategoryService
     public function update(int $id, array $data)
     {
         $fields = ['id', 'photo'];
-        $category = $this->categoryRepositories->getById($id, $fields);
+        $category = $this->categoryRepositories->getById($id, $fields ?? ['*']);
         if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
             if (!empty($category->photo)) {
                 $this->deletePhoto($category->photo);
