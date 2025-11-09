@@ -12,7 +12,7 @@ class MerchantService
     private MerchantRepository $merchantRepository;
     public function __construct(MerchantRepository $merchantRepository)
     {
-        $this->$merchantRepository  = $merchantRepository;
+        $this->merchantRepository  = $merchantRepository;
     }
     public function getAll(array $fields)
     {
