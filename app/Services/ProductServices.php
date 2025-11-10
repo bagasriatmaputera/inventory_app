@@ -13,7 +13,7 @@ class ProductServices
     private ProductRepository $productRepository;
     public function __construct(ProductRepository $productRepository)
     {
-        $this->$productRepository = $productRepository;
+        $this->productRepository = $productRepository;
     }
     public function getAll(array $fields)
     {

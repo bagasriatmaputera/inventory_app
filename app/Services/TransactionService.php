@@ -118,7 +118,7 @@ class TransactionService
                 'grand_total' =>  $grandTotal
             ]);
 
-            $transactionProduct = $this->transactionRepository->createTransactionProduct($transaction->id, $products);
+            $transactionProduct = $this->transactionRepository->createTransactionProduct($transaction->id, $products[]);
 
             return $transaction->fresh();
         });
