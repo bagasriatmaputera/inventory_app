@@ -51,8 +51,8 @@ class WarehouseService
     }
     public function attachProduct(int $warehouseId, int $productId, int $stock)
     {
-        $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
-        $warehaouse->products()->syncWithoutDetaching(
+        $warehouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
+        $warehouse->products()->syncWithoutDetaching(
             [
                 $productId => ['stock' => $stock]
             ]
@@ -60,16 +60,16 @@ class WarehouseService
     }
     public function updateProductStock(int $warehouseId, int $productId,$stock)
     {
-        $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
-        $warehaouse->products()->updateExistingPivot($productId, [
-            'stock' => $stock
+        $warehouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
+        $warehouse->products()->updateExistingPivot($productId, [
+            'warehouse' => $stock
         ]);
-        return $warehaouse->products()->where('product_id' . $productId)->first();
+        return $warehouse->products()->where('product_id' . $productId)->first();
     }
     public function detachProduct(int $warehouseId, int $productId)
     {
-        $warehaouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
-        $warehaouse->products()->detach($productId);
+        $warehouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
+        $warehouse->products()->detach($productId);
     }
     private function uploadPhoto(UploadedFile $photo)
     {
