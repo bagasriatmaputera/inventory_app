@@ -23,5 +23,6 @@ class WarehouseRepositories {
     {
         $warehouse = Warehouse::findOrFail($id);
         $warehouse->delete();
+        return $warehouse;
     }
 }
