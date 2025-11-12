@@ -47,7 +47,7 @@ class WarehouseService
         if ($warehouse->photo) {
             $this->deletePhoto($warehouse->photo);
         }
-        $this->WarehouseRepository->delete($id);
+        return $this->WarehouseRepository->delete($id);
     }
     public function attachProduct(int $warehouseId, int $productId, int $stock)
     {
@@ -58,13 +58,13 @@ class WarehouseService
             ]
         );
     }
-    public function updateProductStock(int $warehouseId, int $productId,$stock)
+    public function updateProductStock(int $warehouseId, int $productId,int $stock)
     {
         $warehouse = $this->WarehouseRepository->getById($warehouseId, ['id']);
         $warehouse->products()->updateExistingPivot($productId, [
-            'warehouse' => $stock
+            'stock' => $stock
         ]);
-        return $warehouse->products()->where('product_id' . $productId)->first();
+        return $warehouse->products()->where('product_id' , $productId)->first();
     }
     public function detachProduct(int $warehouseId, int $productId)
     {
