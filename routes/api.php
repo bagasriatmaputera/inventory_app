@@ -19,4 +19,4 @@ Route::apiResource('merchants', MerchantController::class);
 
 Route::post('/warehouse/{warehouse}/products', [WarehouseProductController::class, 'attach']);
 Route::delete('/warehouse/{warehouse}/products/{product}', [WarehouseProductController::class, 'detach']);
-Route::patch('/warehouse/{warehouse}/products/{product}', [WarehouseProductController::class, 'updateProductStock']);
+Route::patch('/warehouse/{warehouse}/products/{product}', [WarehouseProductController::class, 'update']);

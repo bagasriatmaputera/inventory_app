@@ -41,7 +41,12 @@ class WarehouseController extends Controller
     {
         try {
             $warehouse = $this->WarehouseService->update($id, $request->validated());
-            return response()->json(new WarehouseResource($warehouse));
+            return response()->json(
+                [
+                    'message' => 'Successfully Updated',
+                    'data' => new WarehouseResource($warehouse)
+                ],201
+            );
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Warehouse not found'
@@ -51,9 +56,10 @@ class WarehouseController extends Controller
     public function destroy(int $id)
     {
         try {
-            $this->destroy($id);
+            $warehouse = $this->WarehouseService->delete($id);
             return response()->json([
-                'Success' => 'Warehouse deleted'
+                'Success' => 'Warehouse deleted',
+                'data' =>  $warehouse
             ]);
         } catch (\Throwable $th) {
             return response()->json([
