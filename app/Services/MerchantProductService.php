@@ -15,15 +15,15 @@ class MerchantProductService
     private MerchantRepository $merchantRepository;
     public function __construct(MerchantProductRepository $merchantProductRepository, WarehouseProductRepository $warehouseProductRepository, MerchantRepository $merchantRepository)
     {
-        $this->$merchantProductRepository = $merchantProductRepository;
-        $this->$warehouseProductRepository = $warehouseProductRepository;
-        $this->$merchantRepository = $merchantRepository;
+        $this->merchantProductRepository = $merchantProductRepository;
+        $this->warehouseProductRepository = $warehouseProductRepository;
+        $this->merchantRepository = $merchantRepository;
     }
     public function assignProductToMerchant(array $data)
     {
         return DB::transaction(function () use ($data) {
             $warehouseProducts = $this->warehouseProductRepository->getByWarehouseAndProduct($data['warehouse_id'], $data['product_id']);
-            if (!$warehouseProducts || $warehouseProducts['stock'] < $data['stock']) {
+            if (!$warehouseProducts || $warehouseProducts->stock < $data['stock']) {
                 throw ValidationException::withMessages([
                     'stock' => 'Insufficient stock in warehouse'
                 ]);
@@ -31,7 +31,7 @@ class MerchantProductService
             $existingProduct = $this->merchantProductRepository->getByMerchantProduct($data['merchant_id'], $data['product_id']);
             if ($existingProduct) {
                 throw ValidationException::withMessages([
-                    'product' => 'Product has already exists in tihs merhcant'
+                    'product' => 'Product has already exists in this merhcant'
                 ]);
             }
             // kurangin stock warehouse
