@@ -14,11 +14,11 @@ class MerchantProductRepository
     }
     public function getByMerchantProduct(int $merchantId, int $productId)
     {
-        return MerchantProduct::where('merchat_id', $merchantId)
+        return MerchantProduct::where('merchant_id', $merchantId)
             ->where('product_id', $productId)
             ->first();
     }
-    public function updateStock(int $stock, int $merchantId, $productId)
+    public function updateStock(int $stock, int $merchantId,int $productId)
     {
         $merchant = $this->getByMerchantProduct($merchantId, $productId);
         if (!$merchant) {
