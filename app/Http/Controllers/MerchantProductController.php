@@ -12,7 +12,7 @@ class MerchantProductController extends Controller
     private MerchantProductService $merchantProductService;
     public function __construct(MerchantProductService $merchantProductService)
     {
-        $this->$merchantProductService = $merchantProductService;
+        $this->merchantProductService = $merchantProductService;
     }
     public function store(MerchantStoreRequest $request, int $merchant)
     {
