@@ -39,14 +39,15 @@ class MerchantController extends Controller
         $merchant = $this->merchantService->create($resquest->validated());
         return response()->json(new MerchantResource($merchant));
     }
-    public function update(int $id, array $data)
+    public function update(int $id, MerchantRequest $resquest)
     {
         try {
-            $merchant = $this->merchantService->update($id, $data);
+            $merchant = $this->merchantService->update($id, $resquest->validated());
             return response()->json(new MerchantResource($merchant));
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Merchant not found'
+                'status' => 'error',
+                'message' => 'Merchant not found ' . $th->getMessage()
             ]);
         }
     }
