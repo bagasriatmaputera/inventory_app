@@ -61,6 +61,6 @@ class User extends Authenticatable
     }
     public function merchant()
     {
-        return $this->hasOne(Merger::class, 'keeper_id', 'id');
+        return $this->hasOne(Merchant::class, 'keeper_id', 'id');
     }
 }
