@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\MerchantProductController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseProductController;
 use Illuminate\Http\Request;
@@ -17,6 +19,8 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('warehouses', WarehouseController::class);
 Route::apiResource('merchants', MerchantController::class);
+Route::apiResource('users', UserController::class);
+Route::apiResource('roles', RoleController::class);
 
 Route::post('/warehouse/{warehouse}/products', [WarehouseProductController::class, 'attach']);
 Route::delete('/warehouse/{warehouse}/products/{product}', [WarehouseProductController::class, 'detach']);
