@@ -14,7 +14,7 @@ class RoleService
     public function getAll(array $fields)
     {
         $fields = ['id', 'name'];
-        return $this->roleRepository->getAll($fields);
+        return $this->roleRepository->getAll($fields ?? ['*']);
     }
     public function getById(int $id, array $fields)
     {
