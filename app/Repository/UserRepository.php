@@ -9,11 +9,11 @@ class UserRepository
 {
     public function getAll(array $fields)
     {
-        return User::select($fields)->latest()->pagination(50);
+        return User::select($fields)->latest()->paginate(50);
     }
     public function getById(int $id, array $fields)
     {
-        return User::findOrFail($id)->select($fields);
+        return User::select($fields)->findOrFail($id);
     }
     public function create(array $data)
     {
@@ -21,8 +21,9 @@ class UserRepository
     }
     public function update(int $id, array $data)
     {
-        $user = $this->getById($id, $fields ?? ['*']);
-        return $user->update($data);
+        $user = User::findOrFail($id);
+        $user->update($data);
+        return $user;
     }
     public function delete(int $id)
     {
