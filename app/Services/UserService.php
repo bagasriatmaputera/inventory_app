@@ -13,12 +13,12 @@ class UserService
     private UserRepository $userRepository;
     public function __construct(UserRepository $userRepository)
     {
-        $this->$userRepository = $userRepository;
+        $this->userRepository = $userRepository;
     }
     public function getAll(array $fields)
     {
-        $fields = ['*'];
-        return $this->userRepository->getAll($fields);
+        // $fields = ['*'];
+        return $this->userRepository->getAll($fields ?? ['*']);
     }
     public function getById(int $id, array $fields)
     {
@@ -26,8 +26,10 @@ class UserService
     }
     public function create(array $data)
     {
+        $data['password'] = bcrypt($data['password']);
+
         if (isset($data['photo']) && $data['photo'] instanceof UploadedFile) {
-            return $this->uploadPhoto($data['photo']);
+            $data['photo'] = $this->uploadPhoto($data['photo']);
         }
         return $this->userRepository->create($data);
     }
