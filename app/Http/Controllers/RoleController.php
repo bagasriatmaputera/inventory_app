@@ -9,17 +9,15 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    //
-
     private RoleService $roleService;
     public function __construct(RoleService $roleService)
     {
-        $this->$roleService = $roleService;
+        $this->roleService = $roleService;
     }
-    public function index(array $fields)
+    public function index()
     {
         $fields = ['id', 'name'];
-        $role = $this->roleService->getAll($fields);
+        $role = $this->roleService->getAll($fields ?? ['*']);
         return response()->json(
             RoleResource::collection($role)
         );
@@ -32,7 +30,8 @@ class RoleController extends Controller
             return response()->json(new RoleResource($role));
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Role not found'
+                'status' => 'error',
+                'message' => 'Role not found ' . $th->getMessage()
             ]);
         }
     }
@@ -50,18 +49,20 @@ class RoleController extends Controller
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Role not found'
+                'status' => 'error',
+                'message' => 'Role not found ' . $th->getMessage()
             ]);
         }
     }
     public function update(int $id, RoleRequest $roleRequest)
     {
         try {
-            $role = $this->roleService->update($id,$roleRequest->validated());
+            $role = $this->roleService->update($id, $roleRequest->validated());
             return response()->json(new RoleResource($role));
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Role not found'
+                'status' => 'error',
+                'message' => 'Role not found ' . $th->getMessage()
             ]);
         }
     }
