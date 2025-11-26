@@ -7,9 +7,9 @@ use App\Repository\RoleRepository;
 class RoleService
 {
     private RoleRepository $roleRepository;
-    public function __construct(RoleService $roleService)
+    public function __construct(RoleRepository $roleRepository)
     {
-        $this->$roleService = $roleService;
+        $this->roleRepository = $roleRepository;
     }
     public function getAll(array $fields)
     {
