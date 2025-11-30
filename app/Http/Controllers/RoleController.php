@@ -62,7 +62,7 @@ class RoleController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Role not found ' . $th->getMessage()
+                'message' => 'Role not found , ' . $th->getMessage()
             ]);
         }
     }
