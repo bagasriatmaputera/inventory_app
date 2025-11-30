@@ -24,7 +24,8 @@ class RoleRepository
     public function update(int $id, array $data)
     {
         $role = Role::findOrFail($id);
-        return $role->update($data);
+        $role->update($data);
+        return $role;
     }
     public function delete(int $id)
     {
