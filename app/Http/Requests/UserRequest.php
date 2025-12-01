@@ -24,9 +24,9 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('user'),
-            'password' => $this->isMethod('post') ? 'required|string|min:8' : 'nullables|string|min:8',
+            'password' => $this->isMethod('post') ? 'required|string|min:8' : 'nullable|string|min:8',
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-            'phone' => 'required|string|min:12'
+            'phone' => $this->isMethod('post') ? 'required|string|min:12' : 'nullable|string|min:12'
         ];
     }
 }
