@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'photo' => $this->photo,
-            'roles' => $this->roles->pluck('name'),
+        'roles' => $this->roles->pluck('name'),
             'merchant' => new MerchantResource($this->merchant)
         ];
     }
