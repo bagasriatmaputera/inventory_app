@@ -34,7 +34,7 @@ class TransactionRepository
         $transaction = Transaction::findOrFail($id);
         return $transaction->delete();
     }
-    public function createTransactionProduct(int $transactionId, array $products)
+    public function   createTransactionProduct(int $transactionId, array $products)
     {
         foreach ($products as $product) {
             $subTotal = $product['quantity'] * $product['price'];

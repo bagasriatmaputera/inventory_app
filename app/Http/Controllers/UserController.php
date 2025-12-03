@@ -76,8 +76,8 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'User not found'
-            ], 404);
+                'message' => 'User not found' . $th->getMessage()
+            ], status: 500);
         }
     }
 
