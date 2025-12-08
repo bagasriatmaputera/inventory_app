@@ -65,7 +65,7 @@ class TransactionService
 
             if (Auth::id() !== $merchant->keeper_id) {
                 throw ValidationException::withMessages([
-                    'authotization' => ['You only can prosses transaction fot yout assigned merchant']
+                    'authotization' => ['You only can prosses transaction for your assigned merchant']
                 ]);
             }
 
