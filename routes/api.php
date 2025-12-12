@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\MerchantProductController;
@@ -12,6 +13,10 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::post('register', [AuthController::class, 'register']);
+Route::get('login', [AuthController::class, 'login']);
+Route::get('create-token', [AuthController::class, 'tokenLogin']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -37,5 +42,5 @@ Route::delete('/merchants/{merchants}/products/{product}', [MerchantProductContr
 Route::patch('/merchants/{merchants}/products/{product}', [MerchantProductController::class, 'update']);
 Route::get('/my-merchant', [MerchantController::class, 'getMerchantProfile']);
 Route::get('/my-merchant/transaction', [TransactionController::class, 'getTransactionByMerchant']);
-Route::post('/transaction',[TransactionController::class,'store']);
-Route::get('/transaction/{id}',[TransactionController::class,'show']);
+Route::post('/transaction', [TransactionController::class, 'store']);
+Route::get('/transaction/{id}', [TransactionController::class, 'show']);
